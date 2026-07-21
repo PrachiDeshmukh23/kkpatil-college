@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1e293b;
+  
+  /* Fonts */
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-marathi: var(--font-noto-devanagari), sans-serif;
+
+  /* Design System Color Tokens */
+  --color-navy-dark: #0f172a;
+  --color-navy-light: #1e293b;
+  --color-blue-bright: #2563eb;
+  --color-blue-hover: #1d4ed8;
+  --color-green-medical: #10b981;
+  --color-green-hover: #059669;
+  --color-yellow-notice: #f59e0b;
+  --color-yellow-light: #fef3c7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-navy-dark: var(--color-navy-dark);
+  --color-navy-light: var(--color-navy-light);
+  --color-blue-bright: var(--color-blue-bright);
+  --color-blue-hover: var(--color-blue-hover);
+  --color-green-medical: var(--color-green-medical);
+  --color-green-hover: var(--color-green-hover);
+  --color-yellow-notice: var(--color-yellow-notice);
+  --color-yellow-light: var(--color-yellow-light);
+  
+  --font-sans: var(--font-sans);
+  --font-marathi: var(--font-marathi);
+
+  /* Animation Utilities */
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-slide-up: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-left: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom Keyframe Definitions */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Custom Utilities for Transitions & UI Details */
+.sticky-header {
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
+}
+
+.text-marathi {
+  font-family: var(--font-marathi);
+}
+
+/* Line clamping helper if needed */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Smooth glassmorphism container */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Scroll Fade Animation Helper */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.15);
+}

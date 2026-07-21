@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Course {
+  id           String   @id @default(uuid())
+  name         String
+  duration     String
+  eligibility  String
+  description  String
+  intake       Int      @default(30)
+  syllabus     String   // Comma-separated or JSON string of subjects
+  image        String   // Path or URL to course image
+  brochureUrl  String?  // Optional PDF link
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Enquiry {
+  id             String   @id @default(uuid())
+  studentName    String
+  mobile         String
+  email          String
+  dob            String
+  selectedCourse String
+  qualification  String
+  city           String
+  message        String?
+  status         String   @default("New") // "New", "Contacted", "Follow-up", "Admitted", "Closed"
+  adminNotes     String?
+  createdAt      DateTime @default(now())
+}
+
+model Notice {
+  id          String   @id @default(uuid())
+  title       String
+  date        String   // Display date (e.g. "2026-07-18")
+  category    String   // "Admission", "Exam", "Holiday", "Event", "Workshop", "Circular"
+  description String
+  pdfUrl      String?  // Optional link to attachment PDF
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model GalleryItem {
+  id           String   @id @default(uuid())
+  title        String
+  category     String   // "Campus", "Laboratory", "Students", "Events", "Workshops", "Admissions", "Other"
+  description  String?
+  imageUrl     String
+  displayOrder Int      @default(0)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model SocialPost {
+  id        String   @id @default(uuid())
+  imageUrl  String   // Manually uploaded image URL
+  caption   String
+  postUrl   String   // Link to original public Instagram post
+  postDate  String   // Publish date (e.g. "2026-07-18")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model MandatoryDocument {
+  id           String   @id @default(uuid())
+  name         String
+  category     String   // "Affiliation", "Recognition", "Approvals", "Faculty", "Infrastructure", "Safety", "Fees", "Academic Calendar", "Results", "Other"
+  academicYear String   // E.g. "2025-2026"
+  pdfUrl       String   // Only allow PDF
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model WebContent {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String   // Text or JSON string for slides, principal message, vision, values etc.
+  description String?
+}
+
+model AdminSettings {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String // College name, email, phone, WhatsApp, logo path etc.
+}
+
+model AdminUser {
+  id           String @id @default(uuid())
+  username     String @unique
+  passwordHash String
+}

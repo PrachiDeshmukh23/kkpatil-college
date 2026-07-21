@@ -1,19 +1,14 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticSettings } from "@/lib/staticData";
 import EnquiryForm from "@/components/EnquiryForm";
 import { Download, FileText, CheckSquare, Calendar, Phone, Info } from "lucide-react";
 
-export const revalidate = 0;
-
 export default async function AdmissionsPage() {
-  const settings = await prisma.adminSettings.findMany();
   const settingsMap: Record<string, string> = {
     phone: "Details will be updated shortly",
     email: "sandipkute785@gmail.com",
+    ...staticSettings
   };
-  settings.forEach((s) => {
-    settingsMap[s.key] = s.value;
-  });
 
   return (
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">

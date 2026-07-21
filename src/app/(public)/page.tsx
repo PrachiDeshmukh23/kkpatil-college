@@ -1,10 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { prisma } from "@/lib/db";
 import HeroSlider from "@/components/HeroSlider";
 import GalleryPreview from "@/components/GalleryPreview";
 import VirtualTour from "@/components/VirtualTour";
 import PromoReel from "@/components/PromoReel";
+import {
+  staticSettings,
+  staticWebContent,
+  staticCourses,
+  staticNotices,
+  staticGalleryItems,
+  staticSocialPosts
+} from "@/lib/staticData";
 import {
   ShieldAlert,
   Users,
@@ -24,51 +31,36 @@ import {
   FileText
 } from "lucide-react";
 
-export const revalidate = 0; // Disable static cache for live DB edits
-
 export default async function HomePage() {
-  // 1. Fetch web content
-  const webContent = await prisma.webContent.findMany();
-  const contentMap: Record<string, string> = {};
-  webContent.forEach((c) => {
-    contentMap[c.key] = c.value;
-  });
+  // 1. Load static web content
+  const contentMap: Record<string, string> = {
+    ...staticWebContent
+  };
 
-  // 2. Fetch courses
-  const courses = await prisma.course.findMany({
-    where: { active: true }
-  });
+  // 2. Load static courses
+  const courses = staticCourses;
 
-  // 3. Fetch latest 3 notices
-  const notices = await prisma.notice.findMany({
-    where: { active: true },
-    orderBy: { createdAt: "desc" },
-    take: 3
-  });
+  // 3. Load static notices
+  const notices = [...staticNotices]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 3);
 
-  // 4. Fetch gallery items
-  const galleryItems = await prisma.galleryItem.findMany({
-    where: { active: true },
-    orderBy: { displayOrder: "asc" }
-  });
+  // 4. Load static gallery items
+  const galleryItems = [...staticGalleryItems]
+    .sort((a, b) => a.displayOrder - b.displayOrder);
 
-  // 5. Fetch social posts
-  const socialPosts = await prisma.socialPost.findMany({
-    where: { active: true },
-    orderBy: { postDate: "desc" }
-  });
+  // 5. Load static social posts
+  const socialPosts = [...staticSocialPosts]
+    .sort((a, b) => b.postDate.localeCompare(a.postDate));
 
-  // 6. Fetch settings
-  const settings = await prisma.adminSettings.findMany();
+  // 6. Load static settings
   const settingsMap: Record<string, string> = {
     phone: "Details will be updated shortly",
     whatsapp: "Details will be updated shortly",
     email: "sandipkute785@gmail.com",
-    instagramUrl: "https://www.instagram.com/kkpatil_paramedical_college"
+    instagramUrl: "https://www.instagram.com/kkpatil_paramedical_college",
+    ...staticSettings
   };
-  settings.forEach((s) => {
-    settingsMap[s.key] = s.value;
-  });
 
   const heroSlidesJson = contentMap["hero_slides"];
 

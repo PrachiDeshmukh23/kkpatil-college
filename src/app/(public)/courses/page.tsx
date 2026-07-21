@@ -1,14 +1,9 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticCourses } from "@/lib/staticData";
 import CourseList from "@/components/CourseList";
 
-export const revalidate = 0;
-
 export default async function CoursesPage() {
-  const courses = await prisma.course.findMany({
-    where: { active: true },
-    orderBy: { name: "asc" }
-  });
+  const courses = [...staticCourses].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

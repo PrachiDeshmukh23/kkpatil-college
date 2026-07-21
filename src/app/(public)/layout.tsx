@@ -1,9 +1,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import prisma from "@/lib/db";
-
-export const revalidate = 0; // Disable caching so settings edits show up immediately
+import { staticSettings } from "@/lib/staticData";
 
 export default async function PublicLayout({
   children,
@@ -11,22 +9,8 @@ export default async function PublicLayout({
   children: React.ReactNode;
 }) {
   const settingsMap: Record<string, string> = {
-    phone: "Details will be updated shortly",
-    whatsapp: "Details will be updated shortly",
-    email: "sandipkute785@gmail.com",
-    address: "Details will be updated shortly",
-    collegeName: "K. K. Patil Paramedical College",
-    location: "Sangamner, Maharashtra",
+    ...staticSettings
   };
-
-  try {
-    const dbSettings = await prisma.adminSettings.findMany();
-    dbSettings.forEach((setting) => {
-      settingsMap[setting.key] = setting.value;
-    });
-  } catch (error) {
-    console.error("Failed to load settings from database:", error);
-  }
 
   return (
     <div className="flex flex-col min-h-screen">

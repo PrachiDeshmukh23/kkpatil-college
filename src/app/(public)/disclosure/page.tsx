@@ -1,14 +1,9 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticMandatoryDocuments } from "@/lib/staticData";
 import { FileText, Eye, Download, ShieldCheck } from "lucide-react";
 
-export const revalidate = 0;
-
 export default async function DisclosurePage() {
-  const documents = await prisma.mandatoryDocument.findMany({
-    where: { active: true },
-    orderBy: { createdAt: "desc" }
-  });
+  const documents = staticMandatoryDocuments;
 
   return (
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

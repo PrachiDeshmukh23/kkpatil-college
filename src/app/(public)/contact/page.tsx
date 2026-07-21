@@ -1,24 +1,18 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticSettings } from "@/lib/staticData";
 import { MapPin, Phone, Mail, Clock, Instagram, Info } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
-export const revalidate = 0;
-
 export default async function ContactPage() {
-  const settings = await prisma.adminSettings.findMany();
   const settingsMap: Record<string, string> = {
     phone: "Details will be updated shortly",
     whatsapp: "Details will be updated shortly",
     email: "sandipkute785@gmail.com",
     address: "Details will be updated shortly",
     officeTimings: "Details will be updated shortly",
-    instagramUrl: "https://www.instagram.com/kkpatil_paramedical_college"
+    instagramUrl: "https://www.instagram.com/kkpatil_paramedical_college",
+    ...staticSettings
   };
-
-  settings.forEach((s) => {
-    settingsMap[s.key] = s.value;
-  });
 
   // Check function to display "Details will be updated shortly" cleanly
   const renderContactInfo = (val: string) => {

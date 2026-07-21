@@ -1,16 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import prisma from "@/lib/db";
+import { staticWebContent } from "@/lib/staticData";
 import { Award, Compass, Shield, Target, BookOpen, User } from "lucide-react";
 
-export const revalidate = 0;
-
 export default async function AboutPage() {
-  const content = await prisma.webContent.findMany();
-  const contentMap: Record<string, string> = {};
-  content.forEach((c) => {
-    contentMap[c.key] = c.value;
-  });
+  const contentMap: Record<string, string> = {
+    ...staticWebContent
+  };
 
   return (
     <div className="py-12 md:py-20 space-y-16">

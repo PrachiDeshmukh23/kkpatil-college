@@ -1,7 +1,5 @@
 "use server";
 
-import prisma from "@/lib/db";
-
 export interface SubmitState {
   success: boolean;
   message: string;
@@ -44,49 +42,20 @@ export async function submitEnquiry(prevState: any, formData: FormData): Promise
     return { success: false, message: "You must consent to be contacted by the college." };
   }
 
-  try {
-    // 2. Database-Driven Rate Limiting (Prevent spam submissions from same mobile within 5 minutes)
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    const existingSubmission = await prisma.enquiry.findFirst({
-      where: {
-        mobile: mobile,
-        createdAt: {
-          gte: fiveMinutesAgo
-        }
-      }
-    });
+  // Log the submission to serverless logs (visible in Vercel console)
+  console.log("Enquiry Form Submission (Static Mode):", {
+    studentName,
+    mobile,
+    email,
+    dob,
+    selectedCourse,
+    qualification,
+    city,
+    message
+  });
 
-    if (existingSubmission) {
-      return {
-        success: false,
-        message: "An enquiry was recently submitted using this mobile number. Please try again after 5 minutes."
-      };
-    }
-
-    // 3. Create the Enquiry Record
-    await prisma.enquiry.create({
-      data: {
-        studentName,
-        mobile,
-        email,
-        dob,
-        selectedCourse,
-        qualification,
-        city,
-        message: message || null,
-        status: "New"
-      }
-    });
-
-    return {
-      success: true,
-      message: "Thank you! Your admission enquiry has been submitted. Our admissions desk will contact you shortly."
-    };
-  } catch (error) {
-    console.error("Enquiry submission failed:", error);
-    return {
-      success: false,
-      message: "An unexpected error occurred while saving your enquiry. Please try again later."
-    };
-  }
+  return {
+    success: true,
+    message: "Thank you! Your admission enquiry has been submitted. Our admissions desk will contact you shortly."
+  };
 }

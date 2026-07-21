@@ -1,14 +1,9 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticGalleryItems } from "@/lib/staticData";
 import GalleryPreview from "@/components/GalleryPreview";
 
-export const revalidate = 0;
-
 export default async function GalleryPage() {
-  const galleryItems = await prisma.galleryItem.findMany({
-    where: { active: true },
-    orderBy: { displayOrder: "asc" }
-  });
+  const galleryItems = [...staticGalleryItems].sort((a, b) => a.displayOrder - b.displayOrder);
 
   return (
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

@@ -1,14 +1,9 @@
 import React from "react";
-import prisma from "@/lib/db";
+import { staticNotices } from "@/lib/staticData";
 import NoticeList from "@/components/NoticeList";
 
-export const revalidate = 0;
-
 export default async function NewsPage() {
-  const notices = await prisma.notice.findMany({
-    where: { active: true },
-    orderBy: { createdAt: "desc" }
-  });
+  const notices = [...staticNotices].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

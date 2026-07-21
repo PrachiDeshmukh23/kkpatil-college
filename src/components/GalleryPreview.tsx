@@ -22,7 +22,7 @@ export default function GalleryPreview({ items, showViewAll = true }: GalleryPre
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
-  const categories = ["All", "Campus", "Laboratory", "Students", "Events", "Workshops"];
+  const categories = ["All", "Campus", "Laboratory", "Students", "Events", "Workshops", "Admissions"];
 
   const filteredItems = selectedCategory === "All"
     ? items

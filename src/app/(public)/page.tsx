@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import HeroSlider from "@/components/HeroSlider";
 import GalleryPreview from "@/components/GalleryPreview";
+import VirtualTour from "@/components/VirtualTour";
+import PromoReel from "@/components/PromoReel";
 import {
   ShieldAlert,
   Users,
@@ -507,6 +509,41 @@ export default async function HomePage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* College Virtual Tour Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs font-bold text-green-medical bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest inline-block">
+              Interactive Media
+            </span>
+            <h2 className="text-3xl font-extrabold text-navy-dark tracking-tight">
+              Virtual Video Tours & Course Reels
+            </h2>
+            <p className="text-slate-500 text-sm max-w-xl mx-auto">
+              Explore our state-of-the-art laboratory practices and interactive course reels designed for healthcare aspirants.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Widescreen Video Tour */}
+            <div className="lg:col-span-8 space-y-4">
+              <h3 className="text-lg font-bold text-navy-dark border-b pb-2 border-slate-100 flex items-center gap-2">
+                <span>📹 Interactive Labs Walkthrough</span>
+              </h3>
+              <VirtualTour />
+            </div>
+            
+            {/* Vertical Shorts Reel */}
+            <div className="lg:col-span-4 space-y-4 flex flex-col items-center">
+              <h3 className="text-lg font-bold text-navy-dark border-b pb-2 border-slate-100 w-full text-center lg:text-left flex items-center justify-center lg:justify-start gap-2">
+                <span>📱 Admissions & Career Shorts Reel</span>
+              </h3>
+              <PromoReel />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 8. Gallery Preview Grid */}

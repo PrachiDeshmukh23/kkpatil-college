@@ -164,20 +164,20 @@ export default async function AboutPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 animate-slide-up">
         <div className="text-center space-y-3">
           <h2 className="text-2xl font-bold text-navy-dark">
-            Approvals & Affiliations
+            Recognition & Approvals
           </h2>
           <p className="text-slate-500 text-xs max-w-sm mx-auto">
-            Our statutory compliance and university affiliation contexts.
+            Our statutory compliance and institution recognition contexts.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-2xl border border-slate-150 p-6 sm:p-8 shadow-sm">
-          {/* University Affiliation Image */}
+          {/* College Building Image */}
           <div className="lg:col-span-5 aspect-[16/10] bg-slate-100 rounded-xl overflow-hidden relative border border-slate-200 shadow-inner group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/bharati_vidyapeeth.png"
-              alt="Bharati Vidyapeeth Deemed to be University Gate"
+              src="/images/college_building.png"
+              alt="K. K. Patil Paramedical College Building"
               className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
             />
           </div>
@@ -185,20 +185,20 @@ export default async function AboutPage() {
           {/* Affiliation details */}
           <div className="lg:col-span-7 space-y-4">
             <span className="text-[10px] font-bold text-blue-bright bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
-              University Affiliation
+              College Affiliation
             </span>
             <h3 className="font-bold text-navy-dark text-lg sm:text-xl">
-              Affiliated with Bharati Vidyapeeth (Deemed to be University)
+              K. K. Patil Paramedical College, Sangamner
             </h3>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-              K. K. Patil Paramedical College maintains formal academic affiliations and recognition pipelines. Our programs are designed to align with the curriculum and validation frameworks of renowned medical education bodies, including <strong>Bharati Vidyapeeth Deemed to be University</strong>, Pune.
+              K. K. Patil Paramedical College maintains formal academic affiliations and recognition pipelines. Our programs are designed to align with the curriculum and validation frameworks of renowned medical education bodies, ensuring our students receive high-quality diagnostic and sanitary training.
             </p>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-              Our examinations, practical training standards, and certification programs comply with university guidelines, ensuring your diploma holds high professional value in public and private medical settings across India.
+              Our examinations, practical training standards, and certification programs comply with statutory guidelines, ensuring your diploma holds high professional value in public and private medical settings across India.
             </p>
             <div className="pt-2">
               <Link href="/disclosure" className="inline-flex items-center gap-1 text-xs font-bold text-blue-bright hover:underline">
-                View Affiliation Documents & Disclosures &rarr;
+                View College Documents & Disclosures &rarr;
               </Link>
             </div>
           </div>

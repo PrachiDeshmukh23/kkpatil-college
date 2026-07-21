@@ -64,18 +64,18 @@ export default function HeroSlider({ slidesJson }: HeroSliderProps) {
   };
 
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden bg-slate-900">
+    <div className="relative w-full h-[calc(100vh-116px)] min-h-[550px] overflow-hidden bg-slate-900">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
           key={index}
           className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+            index === current ? "opacity-100 z-10 slide-active" : "opacity-0 z-0"
           }`}
         >
           {/* Background Image with Overlay */}
           <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-10000 scale-105"
+            className="absolute inset-0 bg-cover bg-center slide-bg"
             style={{ backgroundImage: `url(${slide.bgImage})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/80 to-slate-900/40" />
@@ -85,18 +85,18 @@ export default function HeroSlider({ slidesJson }: HeroSliderProps) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <div className="max-w-3xl space-y-6">
                 {slide.badge && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-notice/90 backdrop-blur-sm text-navy-dark text-xs font-bold uppercase tracking-wider rounded-full shadow">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-notice/90 backdrop-blur-sm text-navy-dark text-xs font-bold uppercase tracking-wider rounded-full shadow slide-badge">
                     <Calendar size={13} className="shrink-0 animate-pulse" />
                     <span>{slide.badge}</span>
                   </div>
                 )}
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-sm">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-sm slide-title">
                   {slide.title}
                 </h2>
-                <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed font-medium">
+                <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed font-medium slide-subtitle">
                   {slide.subtitle}
                 </p>
-                <div className="pt-4 flex flex-wrap gap-4">
+                <div className="pt-4 flex flex-wrap gap-4 slide-buttons">
                   <Link
                     href="/courses"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-blue-bright hover:bg-blue-hover text-white text-sm font-bold uppercase tracking-wider rounded-lg shadow-lg transition-transform hover:-translate-y-0.5 duration-150"
